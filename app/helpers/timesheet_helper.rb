@@ -33,7 +33,8 @@ module TimesheetHelper
               :controller => 'timesheet',
               :action => 'report',
               :format => 'csv',
-              :timesheet => timesheet.to_param
+              :timesheet => timesheet,
+              :json => true
             },
             :method => 'post',
             :class => 'icon icon-timesheet')

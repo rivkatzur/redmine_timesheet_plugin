@@ -31,7 +31,13 @@ class TimesheetController < ApplicationController
 
   def report
     if params && params[:timesheet]
-      @timesheet = Timesheet.new(params[:timesheet])
+      if params[:json]
+        @timesheet_params = params[:timesheet]
+        @timesheet = Timesheet.new(JSON.parse(params['timesheet']).with_indifferent_access)
+      else
+        @timesheet_params = params[:timesheet].to_json
+        @timesheet = Timesheet.new(params[:timesheet])
+      end
     else
       redirect_to :action => 'index'
       return
